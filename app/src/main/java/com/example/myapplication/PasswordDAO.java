@@ -72,6 +72,7 @@ public class PasswordDAO {
         sql_dataList = new ArrayList<>();
         String current_sql_sel = "SELECT * FROM passwords where (title like '%"+searchStr+"%') " +
                 "OR (password like '%"+searchStr+"%') " +
+                "OR (username like '%"+searchStr+"%') "+
                 "OR (note like '%"+searchStr+"%')";
 //        String sql = "SELECT * FROM passwords WHERE (title LIKE '%?%') OR (username LIKE '%1%') OR (password LIKE '%1%') OR (note LIKE '%s%')";
         Cursor cursor = db.rawQuery(current_sql_sel,null);
