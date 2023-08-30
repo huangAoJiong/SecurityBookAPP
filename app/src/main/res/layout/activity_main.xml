@@ -97,7 +97,7 @@
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:orientation="horizontal"
             tools:ignore="MissingConstraints">
 
@@ -153,10 +153,12 @@
             android:id="@+id/sql_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_marginTop="52dp"
+            android:layout_marginBottom="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-            tools:layout_editor_absoluteX="0dp"
-            tools:listitem="@layout/item_data_list"/>
+            tools:ignore="MissingConstraints"
+            tools:listitem="@layout/item_data_list" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
