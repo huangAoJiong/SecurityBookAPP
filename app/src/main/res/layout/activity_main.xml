@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:ignore="SpeakableTextPresentCheck"
+    android:background="#AAAAAC"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!--
+        <Button
+            android:id="@+id/set_bg_btn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="#00ffffff"
+            android:text="修改背景"
+            android:layout_centerHorizontal="true"
+            android:textSize="20dp">
+
+
+        </Button>-->
+<!--
+        <Button
+            android:id="@+id/updata_button"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="232dp"
+            android:background="#00ffffff"
+            android:text="更新"
+            android:textSize="20dp" />
+
+        <ImageButton
+            android:id="@+id/add_button"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:background="#00FFFFFF"
+            android:contentDescription="add new user"
+            tools:src="@drawable/add_user" />
+-->
+    </RelativeLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <ImageButton
+        android:id="@+id/add_button"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:background="#00FFFFFF"
+        android:contentDescription="add new user"
+        android:src="@drawable/add_user" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@drawable/edit_round_corners">
+
+
+        <EditText
+            android:id="@+id/edit_search_mainText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:hint="输入关键字搜索"
+            android:background="@null"
+            android:inputType="text"
+            android:layout_weight="1"
+            />
+        <ImageButton
+            android:id="@+id/search_img_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/search"
+            android:layout_weight="5"
+            android:background="#00FFFFFF"
+            android:contentDescription="Enter How Much Cookies You Want"
+            />
+    </LinearLayout>
+</LinearLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstraintLayout_id"
+        android:background="@mipmap/bg2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/text_title_shape"
+                android:text="官网" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/text_title_shape"
+                android:text="用户名"
+                android:layout_width="match_parent"/>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/text_title_shape"
+                android:text="密码" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/text_title_shape"
+                android:text="备注" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/text_title_shape"
+                android:text="修改时间" />
+
+        </LinearLayout>
+
+        <com.baoyz.swipemenulistview.SwipeMenuListView
+
+            android:id="@+id/sql_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            tools:layout_editor_absoluteX="0dp"
+            tools:listitem="@layout/item_data_list"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
