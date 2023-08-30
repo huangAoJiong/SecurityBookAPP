@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LocalDateTime currentDateTime = LocalDateTime.now();
 
         // 定义日期时间格式化器
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年M月d日-HH分mm秒");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年M月d日-HH：mm：ss");
 
         // 格式化日期时间
         String formattedDateTime = currentDateTime.format(formatter);
@@ -175,18 +175,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (!exportDir.exists()) {
                 exportDir.mkdirs();
             }
-            File exportFile = new File(exportDir, "export_codebook.db");
-            File exportFile_Data = new File(exportDir, "export_codebook-"+formattedDateTime+".db");
-            Log.d("datebase", "导出路径："+exportFile_Data.toString());
             try {
+                File exportFile = new File(exportDir, "export_codebook.db");
+                File exportFile_Data = new File(exportDir, "export["+formattedDateTime+"].db");
+                Log.d("datebase", "导出路径："+exportFile_Data.toString());
                 FileInputStream fis = new FileInputStream(dbFile);
                 FileOutputStream fos = new FileOutputStream(exportFile);
+                FileInputStream fis_Data = new FileInputStream(dbFile);
                 FileOutputStream fos_Data = new FileOutputStream(exportFile_Data);
                 FileUtils.copy(fis,fos);
-                FileUtils.copy(fis,fos_Data);
+                FileUtils.copy(fis_Data,fos_Data);
                 fis.close();
                 fos.close();
                 fos_Data.close();
+                fis_Data.close();
                 Toast.makeText(MainActivity.this,"数据成功导出，请及时备份",Toast.LENGTH_SHORT).show();
             } catch (IOException e) {
                 Log.d("datebase", "导出失败: ");
