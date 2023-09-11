@@ -7,17 +7,21 @@ import static android.Manifest.permission.READ_MEDIA_VIDEO;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.UiModeManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.database.sqlite.SQLiteDatabase;
@@ -109,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int REQUEST_CODE = 1;
     private static final int REQUEST_STORAGE_PERMISSION = 1;
     private static final String[] PERMISSIONS = {READ_EXTERNAL_STORAGE};
+    private  static int Account_count = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,6 +152,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.db_menu_layout, menu);
         return true;
+    }
+
+    /**
+     * 功能：app菜单的item显示icon
+     **/
+
+    @Override
+    public boolean onMenuOpened(int featureId, Menu menu)
+    {
+        if (menu != null) {
+            if (menu.getClass().getSimpleName().equalsIgnoreCase("MenuBuilder")) {
+                try {
+                    Method method = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
+                    method.setAccessible(true);
+                    method.invoke(menu, true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return super.onMenuOpened(featureId, menu);
     }
 
     /**
@@ -216,6 +242,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         else if(itemId == R.id.charge_bg_id){
             chooseImage();
+        }
+        else if(itemId == R.id.detail_id){
+            AlertDialog dialog_datail;
+            PackageManager manager = this.getPackageManager();
+            String appName = null;
+            String versionName = null;
+            String sdkVersion = null;
+            String PackageName = null;
+            int versionCode = 0;
+            try {
+                PackageInfo info = manager.getPackageInfo(this.getPackageName(), 0);
+                appName = manager.getApplicationLabel(this.getApplicationInfo()).toString();
+                versionName = info.versionName;
+                versionCode = info.versionCode;
+//                sdkVersion = info.;
+                PackageName = info.packageName;
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            dialog_datail = new AlertDialog.Builder(this)
+                    .setTitle("说明")//设置标题
+                    .setMessage("app:"+appName+"\n版本号:"+versionName+"\nSdkVersion:"+sdkVersion+
+                            "\nPackageName:"+PackageName+"\nauthor：Jason\n当前记录："+Account_count)
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).create();
+            dialog_datail.show();
+        }
+        else if (itemId == R.id.model_B_W_id){
+            showDarkorLightAlertDialog();
         }
 
         return super.onOptionsItemSelected(item);
@@ -502,6 +562,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         pwdDAOmain = new PasswordDAO(this);
         pwdDAOmain.queryPasswordAll();
         adapter = new ListViewAdapter(this, pwdDAOmain.sql_dataList);
+        Account_count = pwdDAOmain.sql_dataList.size();
         sql_List_view.setAdapter(adapter);
     }
 
@@ -660,9 +721,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
+    private AlertDialog alertDialog2 = null; //单选框
+    private int chooModel = 2;//0:dark   1 : light    2 : auto
+    public void showDarkorLightAlertDialog() {
 
+        UiModeManager mUiModeManager = (UiModeManager) this.getSystemService(Context.UI_MODE_SERVICE);
+        final String[] items = {"暗色", "亮色", "自动"};
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+        alertBuilder.setTitle("暗色模式");
+        alertBuilder.setSingleChoiceItems(items, chooModel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                chooModel = i;
+            }
+        });
+        alertBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+//                Toast.makeText(MainActivity.this, ""+chooModel, Toast.LENGTH_SHORT).show();
+                if(chooModel == 0){
+                    //mUiModeManager.setNightMode(UiModeManager.MODE_NIGHT_YES); // 深色模式（黑暗模式）
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                } else if (chooModel ==1) {
+                    // mUiModeManager.setNightMode(UiModeManager.MODE_NIGHT_NO); // 普通模式
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                } else if (chooModel == 2) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                }
 
+                alertDialog2.dismiss();
+            }
+        });
 
+        alertBuilder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                alertDialog2.dismiss();
+            }
+        });
+
+        alertDialog2 = alertBuilder.create();
+        alertDialog2.show();
+    }
 }
 
 

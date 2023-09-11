@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--    第一行代码为固定代码，不可改变-->
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
     <item
         android:id="@+id/export_db_id"
-        android:title="导出数据"/>
+        android:icon="@drawable/export1"
+        android:title="导出"/>
     <item
         android:id="@+id/import_db_id"
-        android:title="导入数据"/>
+        android:icon="@drawable/import1"
+        android:title="导入"/>
     <item
         android:id="@+id/charge_bg_id"
-        android:title="更换背景图片"/>
+        android:icon="@drawable/choose_bg"
+        android:title="更换背景"/>
+    <item
+        android:id="@+id/detail_id"
+        android:icon="@drawable/help"
+        android:title="说明" />
+    <item
+        android:id="@+id/model_B_W_id"
+        android:title="系统颜色"
+        android:icon="@drawable/model_color"/>
 </menu>
