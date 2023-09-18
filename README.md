@@ -70,13 +70,13 @@
 
 更改下面窗口：
 
-![502cdcc8ba4de461e5b72ee35b111d7](D:\Android\Pro\SecurityBookAPP\502cdcc8ba4de461e5b72ee35b111d7.jpg)
+<img src="D:\Android\Pro\SecurityBookAPP\README-src/502cdcc8ba4de461e5b72ee35b111d7.jpg" alt="502cdcc8ba4de461e5b72ee35b111d7" style="zoom:50%;" />
 
 
 
 ## 说明（About）
 
-![786ad4b5bf59b16b773838152d58a72](D:\Android\Pro\SecurityBookAPP\786ad4b5bf59b16b773838152d58a72.jpg)
+<img src="D:\Android\Pro\SecurityBookAPP\README-src/786ad4b5bf59b16b773838152d58a72.jpg" alt="786ad4b5bf59b16b773838152d58a72" style="zoom:50%;" />
 
 ## 系统颜色
 
@@ -84,4 +84,4 @@
 
 也可以自定义颜色
 
-![ceb8cf4f5b9b806b3d2285f3ca036bd](D:\Android\Pro\SecurityBookAPP\ceb8cf4f5b9b806b3d2285f3ca036bd.jpg)
+<img src="D:\Android\Pro\SecurityBookAPP\README-src/ceb8cf4f5b9b806b3d2285f3ca036bd.jpg" alt="ceb8cf4f5b9b806b3d2285f3ca036bd" style="zoom:50%;" />
