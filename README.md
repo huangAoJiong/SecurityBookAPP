@@ -67,3 +67,21 @@
 ## 导出、导入数据
 
 <img src=".\README-src\fe453360fc58f20a7581a5d56dd64fb.jpg" alt="fe453360fc58f20a7581a5d56dd64fb" style="zoom:25%;" />
+
+更改下面窗口：
+
+![502cdcc8ba4de461e5b72ee35b111d7](D:\Android\Pro\SecurityBookAPP\502cdcc8ba4de461e5b72ee35b111d7.jpg)
+
+
+
+## 说明（About）
+
+![786ad4b5bf59b16b773838152d58a72](D:\Android\Pro\SecurityBookAPP\786ad4b5bf59b16b773838152d58a72.jpg)
+
+## 系统颜色
+
+可以跟随Android系统的亮色/暗色模式；
+
+也可以自定义颜色
+
+![ceb8cf4f5b9b806b3d2285f3ca036bd](D:\Android\Pro\SecurityBookAPP\ceb8cf4f5b9b806b3d2285f3ca036bd.jpg)

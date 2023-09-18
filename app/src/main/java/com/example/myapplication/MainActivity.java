@@ -80,7 +80,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {//,ColorDialog.OnColorSelectedListener {
 
     private final int REQUEST_PERMISSION_CODE = 111;
     private String[] PERMISSION_STORAGE = {
