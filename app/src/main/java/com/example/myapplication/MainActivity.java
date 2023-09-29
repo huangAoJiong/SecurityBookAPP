@@ -276,7 +276,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             dialog_datail = new AlertDialog.Builder(this)
                     .setTitle("About")//设置标题
                     .setMessage("app:"+appName+"\n版本号:"+versionName+"\nSdkVersion:"+sdkVersion+
-                            "\nPackageName:"+PackageName+"\nauthor：Jason\n当前记录："+Account_count)
+                            "\nPackageName:"+PackageName+"\nauthor：Jason\n当前记录："+Account_count+
+                            "\n(By https://github.com/huangAoJiong/SecurityBookAPP)")
                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -819,7 +820,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void showDialogWithFileContent(String content) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("文件内容");
+        builder.setTitle("说明");
         builder.setMessage(content);
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override

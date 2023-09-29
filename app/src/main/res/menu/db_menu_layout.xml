@@ -15,11 +15,15 @@
         android:icon="@drawable/choose_bg"
         android:title="更换背景"/>
     <item
-        android:id="@+id/detail_id"
-        android:icon="@drawable/help"
-        android:title="说明" />
-    <item
         android:id="@+id/model_B_W_id"
         android:title="系统颜色"
         android:icon="@drawable/model_color"/>
+    <item
+        android:id="@+id/item_explain"
+        android:title="说明"
+        android:icon="@drawable/explain"/>
+    <item
+        android:id="@+id/detail_id"
+        android:icon="@drawable/about"
+        android:title="About" />
 </menu>
