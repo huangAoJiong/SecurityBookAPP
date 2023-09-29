@@ -24,6 +24,14 @@ android {
             outputFileName = "haojCodeBookAPK.apk"
         }
     }
+//    signingConfigs {
+//        externalOverride {
+//            storeFile file('app/20230929.jks')
+//            storePassword 'aY123@'
+//            keyAlias 'key0'
+//            keyPassword 'aY123@'
+//        }
+//    }
     buildTypes {
         release {
             minifyEnabled false
@@ -65,16 +73,15 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    implementation 'com.baoyz.swipemenulistview:library:1.3.0'
     androidTestImplementation platform('androidx.compose:compose-bom:2022.10.00')
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
 //    implementation 'com.baoyz.swipemenulistview:library:1.3.0'
-    implementation('com.baoyz.swipemenulistview:library:1.3.0') {
-        exclude module: 'com.baoyz.swipemenulistview.SwipeMenu'
-        exclude group: 'com.baoyz.swipemenulistview.SwipeMenu'
-    }
+//    implementation('com.baoyz.swipemenulistview:library:1.3.0') {
+//        exclude module: 'com.baoyz.swipemenulistview.SwipeMenu'
+//        exclude group: 'com.baoyz.swipemenulistview.SwipeMenu'
+//    }
 
 
 
