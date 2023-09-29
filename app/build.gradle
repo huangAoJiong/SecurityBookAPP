@@ -12,7 +12,7 @@ android {
         minSdk 24
         targetSdk 33
         versionCode 2
-        versionName "2.30.8.2023"
+        versionName "2.29.9.2023"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -70,5 +70,12 @@ dependencies {
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
-//    implementation 'com.example.myapplication.swipemenulistview:library:1.3.0'
+//    implementation 'com.baoyz.swipemenulistview:library:1.3.0'
+    implementation('com.baoyz.swipemenulistview:library:1.3.0') {
+        exclude module: 'com.baoyz.swipemenulistview.SwipeMenu'
+        exclude group: 'com.baoyz.swipemenulistview.SwipeMenu'
+    }
+
+
+
 }

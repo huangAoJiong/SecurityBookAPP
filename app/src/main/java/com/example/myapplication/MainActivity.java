@@ -41,6 +41,7 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -289,6 +290,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         add_user_Btn = (ImageButton)findViewById(R.id.add_button);
 //        update_Btn = (Button)findViewById(R.id.updata_button);
         search_edit = findViewById(R.id.edit_search_mainText);
+        search_edit.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER){
+//                    Log.e("MainActivity", "onKey: 按下回车键");
+                    String string = search_edit.getText().toString();
+                    pwdDAOmain = new PasswordDAO(MainActivity.this);
+                    pwdDAOmain.querySingleCursor_catItem(string);
+                    adapter = new ListViewAdapter(MainActivity.this, pwdDAOmain.sql_dataList);
+                    sql_List_view.setAdapter(adapter);
+                    return true;
+                }
+                return false;
+            }
+        });
         search_img_btn = (ImageButton)findViewById(R.id.search_img_btn);
 //        //初始化ListView
         sql_List_view =  findViewById(R.id.sql_list);
