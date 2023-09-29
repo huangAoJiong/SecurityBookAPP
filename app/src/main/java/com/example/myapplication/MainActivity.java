@@ -62,17 +62,25 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuLayout;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.myapplication.unit.DB;
+//import com.example.myapplication.about.*;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLConnection;
 import java.nio.channels.FileChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -80,6 +88,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {//,ColorDialog.OnColorSelectedListener {
 
@@ -264,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             dialog_datail = new AlertDialog.Builder(this)
-                    .setTitle("说明")//设置标题
+                    .setTitle("About")//设置标题
                     .setMessage("app:"+appName+"\n版本号:"+versionName+"\nSdkVersion:"+sdkVersion+
                             "\nPackageName:"+PackageName+"\nauthor：Jason\n当前记录："+Account_count)
                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -277,6 +287,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         else if (itemId == R.id.model_B_W_id){
             showDarkorLightAlertDialog();
+        } else if (itemId == R.id.item_explain) {
+            // 读取a.txt文件内容
+            String fileContent = readFileFromAssets("a.txt");
+            // 显示文件内容在对话框中
+            showDialogWithFileContent(fileContent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -779,6 +794,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         alertDialog2 = alertBuilder.create();
         alertDialog2.show();
     }
+
+
+    private String readFileFromAssets(String filename) {
+        StringBuilder fileContent = new StringBuilder();
+
+        try {
+            InputStream inputStream = getAssets().open(filename);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                fileContent.append(line).append("\n");
+            }
+
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.d("explains",  e.toString());
+        }
+
+        return fileContent.toString();
+    }
+
+    private void showDialogWithFileContent(String content) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("文件内容");
+        builder.setMessage(content);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+
+
 }
 
 
