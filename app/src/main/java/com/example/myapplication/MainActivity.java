@@ -16,6 +16,8 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.UiModeManager;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -517,6 +519,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String pwdStr = pwdDAOmain.querySinglePwd_catItem(item_clicked.getTitleStr());
         AlertDialog.Builder builder = new AlertDialog.Builder( MainActivity.this)
                 .setMessage(pwdStr);
+        builder.setNegativeButton( "一键复制",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                cm.setPrimaryClip(ClipData.newPlainText("passwd", pwdStr));//text也可以是"null"
+                if (cm.hasPrimaryClip()) {
+                    cm.getPrimaryClip().getItemAt(0).getText();
+                }
+                Toast.makeText( MainActivity.this,"复制成功", Toast.LENGTH_SHORT).show();
+            }
+        } );
         builder.setPositiveButton( "确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {            }

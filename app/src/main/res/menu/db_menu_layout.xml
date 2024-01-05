@@ -5,11 +5,11 @@
     <item
         android:id="@+id/export_db_id"
         android:icon="@drawable/export1"
-        android:title="导出"/>
+        android:title="数据备份"/>
     <item
         android:id="@+id/import_db_id"
         android:icon="@drawable/import1"
-        android:title="导入"/>
+        android:title="导入数据"/>
     <item
         android:id="@+id/charge_bg_id"
         android:icon="@drawable/choose_bg"
