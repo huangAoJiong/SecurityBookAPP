@@ -11,8 +11,8 @@ android {
         applicationId "com.example.myapplication"
         minSdk 24
         targetSdk 33
-        versionCode 2
-        versionName "3.5.1.2024"
+        versionCode 3
+        versionName "3.6.1.2024"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -21,15 +21,26 @@ android {
     }
     android.applicationVariants.all {
         variant-> variant.outputs.all {
-            outputFileName = "haojCodeBookAPK.apk"
+            outputFileName = "Security-release.apk"
         }
     }
 //    signingConfigs {
-//        externalOverride {
-//            storeFile file('app/20230929.jks')
-//            storePassword 'aY123@'
-//            keyAlias 'key0'
-//            keyPassword 'aY123@'
+//        debug {
+//            storeFile file('keystores/debug.keystore')
+//        }
+//        release {
+//            keyAlias 'androiddebugkey'
+//            keyPassword 'android'
+//            storeFile file('keystores/debug.keystore')
+//            storePassword 'android'
+//        }
+//    }
+//    signingConfigs {
+//        release {
+//            storeFile file('app/20240106.jks')
+//            storePassword '123456'
+//            keyAlias 'key6'
+//            keyPassword '123456'
 //        }
 //    }
     buildTypes {

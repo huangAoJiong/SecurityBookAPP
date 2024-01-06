@@ -18,6 +18,7 @@
         android:id="@+id/model_B_W_id"
         android:title="系统颜色"
         android:icon="@drawable/model_color"/>
+
     <item
         android:id="@+id/item_explain"
         android:title="说明"
