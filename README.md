@@ -1,5 +1,17 @@
 # 简易密码本
 
+---
+
+## 更新
+
+- 密码存入数据库时加密，直接读取数据库文件无法直接获取密码信息，需解密才可以看到
+- 显示每次查询数据条数
+- 多功能界面早已更新
+
+---
+
+
+
 ## 初衷
 
 现代生活花花绿绿，一个人含有太多的“身（账）份（号）”，一个网站一个“身份”，一个用户一个“身份”，“身份”多了，总不能想起自己对应的“角（密）色（码）”。
@@ -24,7 +36,7 @@
 
 ## 主界面
 
-<img src=".\README-src\558e345c7c3b7d04be4dd1d72206eb1.jpg" alt="558e345c7c3b7d04be4dd1d72206eb1" style="zoom:25%;" />
+<img src=".\README-src\主界面.jpg" alt="558e345c7c3b7d04be4dd1d72206eb1" style="zoom:25%;" />
 
 ## 新增用户密码
 
@@ -50,7 +62,7 @@
 
 支持修改、查看密码和删除功能
 
-<img src=".\README-src\cacbf25df9a437555f5683a53d02bbd.jpg" alt="cacbf25df9a437555f5683a53d02bbd" style="zoom:25%;" />
+<img src=".\README-src\左滑界面.jpg" alt="cacbf25df9a437555f5683a53d02bbd" style="zoom:25%;" />
 
 
 
@@ -66,15 +78,13 @@
 
 ## 导出、导入数据
 
-<img src=".\README-src\fe453360fc58f20a7581a5d56dd64fb.jpg" alt="fe453360fc58f20a7581a5d56dd64fb" style="zoom:25%;" />
-
-更改下面窗口：
-
-<img src="D:\Android\Pro\SecurityBookAPP\README-src/502cdcc8ba4de461e5b72ee35b111d7.jpg" alt="502cdcc8ba4de461e5b72ee35b111d7" style="zoom:50%;" />
+<img src=".\README-src\多功能菜单.jpg" alt="fe453360fc58f20a7581a5d56dd64fb" style="zoom:25%;" />
 
 
 
-## 说明（About）
+
+
+## About
 
 <img src="D:\Android\Pro\SecurityBookAPP\README-src/786ad4b5bf59b16b773838152d58a72.jpg" alt="786ad4b5bf59b16b773838152d58a72" style="zoom:50%;" />
 
@@ -85,3 +95,11 @@
 也可以自定义颜色
 
 <img src="D:\Android\Pro\SecurityBookAPP\README-src/ceb8cf4f5b9b806b3d2285f3ca036bd.jpg" alt="ceb8cf4f5b9b806b3d2285f3ca036bd" style="zoom:50%;" />
+
+
+
+## 说明
+
+内置多个好玩、好用项目，自行挖掘吧！
+
+![多功能——说明界面](./README-src/多项目说明.jpg)

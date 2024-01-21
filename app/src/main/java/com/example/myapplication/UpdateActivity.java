@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.myapplication.unit.AESUtil;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -59,7 +61,8 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
         if(id == R.id.subminupdateBtn){
             String newtitleStr = upTitle.getText().toString();
             String newuserStr = upUser.getText().toString();
-            String newpwdStr = upPwd.getText().toString();
+//            String newpwdStr = upPwd.getText().toString();
+            String newpwdStr = AESUtil.encrypt(upPwd.getText().toString(),AESUtil.padKey(AESUtil.AESKey));
             String newnoteStr = upNote.getText().toString();
             String dateStr = new SimpleDateFormat("yyyy-MM-dd \n HH:mm:ss").format(new Date(System.currentTimeMillis()));
             Password ps = new Password(newtitleStr,newuserStr,newpwdStr,newnoteStr,dateStr);

@@ -315,7 +315,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                    Log.e("MainActivity", "onKey: 按下回车键");
                     String string = search_edit.getText().toString();
                     pwdDAOmain = new PasswordDAO(MainActivity.this);
-                    pwdDAOmain.querySingleCursor_catItem(string);
+                    int count = pwdDAOmain.querySingleCursor_catItem(string);
                     adapter = new ListViewAdapter(MainActivity.this, pwdDAOmain.sql_dataList);
                     sql_List_view.setAdapter(adapter);
                     return true;
@@ -505,7 +505,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Bundle bundle = new Bundle();
         bundle.putString("UPtitle",item_clicked.getTitleStr());
         bundle.putString("UPuser",item_clicked.getUserStr());
-        bundle.putString("UPpwd", pwdDAOmain.querySinglePwd_catItem(item_clicked.getTitleStr()));
+        bundle.putString("UPpwd", pwdDAOmain.querySinglePwd_catItem_AES(item_clicked.getTitleStr()));
         bundle.putString("UPnote",item_clicked.getNoteStr());
         Intent intent = new Intent(MainActivity.this,UpdateActivity.class);
         intent.putExtras(bundle);
@@ -516,7 +516,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void catPwd(int position){
         AppInfo item_clicked  = (AppInfo)sql_List_view.getItemAtPosition(position);
         pwdDAOmain = new PasswordDAO(MainActivity.this);
-        String pwdStr = pwdDAOmain.querySinglePwd_catItem(item_clicked.getTitleStr());
+        String pwdStr = pwdDAOmain.querySinglePwd_catItem_AES(item_clicked.getTitleStr());
         AlertDialog.Builder builder = new AlertDialog.Builder( MainActivity.this)
                 .setMessage(pwdStr);
         builder.setNegativeButton( "一键复制",new DialogInterface.OnClickListener() {
@@ -590,7 +590,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(id == R.id.search_img_btn){
             String string = search_edit.getText().toString();
             pwdDAOmain = new PasswordDAO(this);
-            pwdDAOmain.querySingleCursor_catItem(string);
+            int count = pwdDAOmain.querySingleCursor_catItem(string);
+            Toast.makeText( MainActivity.this,"查询到"+string+"相关数据:"+count+"条", Toast.LENGTH_LONG).show();
             adapter = new ListViewAdapter(this, pwdDAOmain.sql_dataList);
             sql_List_view.setAdapter(adapter);
         }

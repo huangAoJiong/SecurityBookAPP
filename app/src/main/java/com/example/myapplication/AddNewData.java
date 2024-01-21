@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.myapplication.unit.AESUtil;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -57,7 +59,15 @@ public class AddNewData extends AppCompatActivity implements View.OnClickListene
 
             String newtitleStr = newTitle.getText().toString();
             String newuserStr = newUser.getText().toString();
-            String newpwdStr = newPwd.getText().toString();
+//            String newpwdStr = newPwd.getText().toString();
+            Log.d("AESAES","55555555555555:开始" );
+            String newpwdStr = "";
+            try{newpwdStr = AESUtil.encrypt(newPwd.getText().toString(),AESUtil.padKey(AESUtil.AESKey));}catch (Exception e){
+                newpwdStr = newPwd.getText().toString();Log.d("AESAES","55555555555555:开始" +e);
+            }
+
+
+            Log.d("AESAES","55555555555555:" + newpwdStr);
             String newnoteStr = newNote.getText().toString();
             String dateStr = new SimpleDateFormat("YY-MM-DD 'at' HH:mm:ss").format(new Date(System.currentTimeMillis()));
             Password ps = new Password(newtitleStr,newuserStr,newpwdStr,newnoteStr,dateStr);
