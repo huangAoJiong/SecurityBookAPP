@@ -86,7 +86,7 @@
 
 ## About
 
-<img src="D:\Android\Pro\SecurityBookAPP\README-src/786ad4b5bf59b16b773838152d58a72.jpg" alt="786ad4b5bf59b16b773838152d58a72" style="zoom:50%;" />
+<img src="README-src/786ad4b5bf59b16b773838152d58a72.jpg" alt="786ad4b5bf59b16b773838152d58a72" style="zoom:50%;" />
 
 ## 系统颜色
 
@@ -94,7 +94,7 @@
 
 也可以自定义颜色
 
-<img src="D:\Android\Pro\SecurityBookAPP\README-src/ceb8cf4f5b9b806b3d2285f3ca036bd.jpg" alt="ceb8cf4f5b9b806b3d2285f3ca036bd" style="zoom:50%;" />
+<img src="README-src/ceb8cf4f5b9b806b3d2285f3ca036bd.jpg" alt="ceb8cf4f5b9b806b3d2285f3ca036bd" style="zoom:50%;" />
 
 
 
