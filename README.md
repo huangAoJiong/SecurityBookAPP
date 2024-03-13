@@ -88,7 +88,11 @@
 
 ## About
 
+<<<<<<< HEAD
 <img src=".\README-src/786ad4b5bf59b16b773838152d58a72.jpg" alt="786ad4b5bf59b16b773838152d58a72" style="zoom:50%;" />
+=======
+<img src="README-src/786ad4b5bf59b16b773838152d58a72.jpg" alt="786ad4b5bf59b16b773838152d58a72" style="zoom:50%;" />
+>>>>>>> 41d37a9d5c9edb1527e726d5a05dac758192a364
 
 ## 系统颜色
 
@@ -96,7 +100,11 @@
 
 也可以自定义颜色
 
+<<<<<<< HEAD
 <img src=".\README-src/ceb8cf4f5b9b806b3d2285f3ca036bd.jpg" alt="ceb8cf4f5b9b806b3d2285f3ca036bd" style="zoom:50%;" />
+=======
+<img src="README-src/ceb8cf4f5b9b806b3d2285f3ca036bd.jpg" alt="ceb8cf4f5b9b806b3d2285f3ca036bd" style="zoom:50%;" />
+>>>>>>> 41d37a9d5c9edb1527e726d5a05dac758192a364
 
 
 
