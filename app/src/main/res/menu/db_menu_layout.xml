@@ -11,6 +11,10 @@
         android:icon="@drawable/import1"
         android:title="导入数据"/>
     <item
+        android:id="@+id/sql_sort_id"
+        android:icon="@drawable/sort"
+        android:title="排序方式"/>
+    <item
         android:id="@+id/charge_bg_id"
         android:icon="@drawable/choose_bg"
         android:title="更换背景"/>
@@ -27,4 +31,5 @@
         android:id="@+id/detail_id"
         android:icon="@drawable/about"
         android:title="About" />
+
 </menu>

@@ -55,6 +55,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 //import com.example.myapplication.swipemenulistview.SwipeMenuListView;
@@ -110,6 +111,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton add_user_Btn;
     private EditText search_edit;
     private ImageButton search_img_btn;
+    private TextView init_sort_text_btn;
+    private TextView date_sort_text_btn;
     private Button update_Btn;
     private Button setBG_Btn;
     private androidx.constraintlayout.widget.ConstraintLayout _list_;
@@ -127,6 +130,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int REQUEST_STORAGE_PERMISSION = 1;
     private static final String[] PERMISSIONS = {READ_EXTERNAL_STORAGE};
     private  static int Account_count = 0;
+    private int chooModel = 0;//0:auto   1 : dark    2 : light
+    private static int sort_model_flag=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -190,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * 实现菜单的点击事件，导出数据和导入数据的实现
-     *
+     * 右上角三个点的菜单
      * @param item
      * @return
      */
@@ -295,6 +300,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String fileContent = readFileFromAssets("a.txt");
             // 显示文件内容在对话框中
             showDialogWithFileContent(fileContent);
+        } else if (itemId == R.id.sql_sort_id) {
+            set_sort_model();
         }
 
         return super.onOptionsItemSelected(item);
@@ -324,6 +331,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         search_img_btn = (ImageButton)findViewById(R.id.search_img_btn);
+        init_sort_text_btn = (TextView)findViewById(R.id.textView2) ;
+        date_sort_text_btn = (TextView)findViewById(R.id.textView6);
+
 //        //初始化ListView
         sql_List_view =  findViewById(R.id.sql_list);
         pwdDAOmain = new PasswordDAO(this);
@@ -339,6 +349,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         add_user_Btn.setOnClickListener(this);
 //        update_Btn.setOnClickListener(this);
         search_img_btn.setOnClickListener(this);
+        init_sort_text_btn.setOnClickListener(this);
+        date_sort_text_btn.setOnClickListener(this);
+
        /* 删除了该按钮setBG_Btn.setOnClickListener(this);*/
         updateList();
         InitListBackGround();
@@ -585,8 +598,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
             finish();
         }
-//        if(id == R.id.updata_button)
-//            updateList();
         if(id == R.id.search_img_btn){
             String string = search_edit.getText().toString();
             pwdDAOmain = new PasswordDAO(this);
@@ -595,12 +606,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             adapter = new ListViewAdapter(this, pwdDAOmain.sql_dataList);
             sql_List_view.setAdapter(adapter);
         }
-        /*
-        //删除了该按钮
-        if(id==R.id.set_bg_btn){
-            chooseImage();
-        }*/
-
+        //默认拍戏。点击官网的title，可以切换为默认的排序方式
+        if(id==R.id.textView2){
+            chooModel = 0;
+            String string = search_edit.getText().toString();
+            pwdDAOmain = new PasswordDAO(MainActivity.this);
+            int count = pwdDAOmain.queryBlurrySort(string,chooModel);
+            adapter = new ListViewAdapter(MainActivity.this, pwdDAOmain.sql_dataList);
+            sql_List_view.setAdapter(adapter);
+        }
+        //根据日期排序。点击日期的title，可以切换排序方式
+        if(id==R.id.textView6){
+            sort_model_flag = (sort_model_flag++%2 == 0)?1:2;
+            chooModel = sort_model_flag;
+            String string = search_edit.getText().toString();
+            pwdDAOmain = new PasswordDAO(MainActivity.this);
+            int count = pwdDAOmain.queryBlurrySort(string,chooModel);
+            adapter = new ListViewAdapter(MainActivity.this, pwdDAOmain.sql_dataList);
+            sql_List_view.setAdapter(adapter);
+        }
     }
     public void updateList(){
         Context c;
@@ -768,11 +792,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
     private AlertDialog alertDialog2 = null; //单选框
-    private int chooModel = 2;//0:dark   1 : light    2 : auto
     public void showDarkorLightAlertDialog() {
 
         UiModeManager mUiModeManager = (UiModeManager) this.getSystemService(Context.UI_MODE_SERVICE);
-        final String[] items = {"暗色", "亮色", "自动"};
+        final String[] items = {"自动", "暗色", "亮色"};
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
         alertBuilder.setTitle("暗色模式");
         alertBuilder.setSingleChoiceItems(items, chooModel, new DialogInterface.OnClickListener() {
@@ -785,13 +808,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 //                Toast.makeText(MainActivity.this, ""+chooModel, Toast.LENGTH_SHORT).show();
-                if(chooModel == 0){
+                if(chooModel == 1){
                     //mUiModeManager.setNightMode(UiModeManager.MODE_NIGHT_YES); // 深色模式（黑暗模式）
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                } else if (chooModel ==1) {
+                } else if (chooModel ==2) {
                     // mUiModeManager.setNightMode(UiModeManager.MODE_NIGHT_NO); // 普通模式
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                } else if (chooModel == 2) {
+                } else if (chooModel == 0) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
                 }
 
@@ -810,6 +833,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         alertDialog2.show();
     }
 
+    /*设置排序选择模式*/
+    public void set_sort_model(){
+        final String[] items = {"默认(创建时间)", "修改时间正序", "修改时间倒叙"};
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+        alertBuilder.setTitle("查询结果排序方式");
+        alertBuilder.setSingleChoiceItems(items, chooModel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                chooModel = i;
+            }
+        });
+        alertBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String string = search_edit.getText().toString();
+                pwdDAOmain = new PasswordDAO(MainActivity.this);
+                int count = pwdDAOmain.queryBlurrySort(string,chooModel);
+                Toast.makeText( MainActivity.this,"查询到"+string+"相关数据:"+count+"条", Toast.LENGTH_LONG).show();
+                adapter = new ListViewAdapter(MainActivity.this, pwdDAOmain.sql_dataList);
+                sql_List_view.setAdapter(adapter);
+                alertDialog2.dismiss();
+            }
+        });
+        alertBuilder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                alertDialog2.dismiss();
+            }
+        });
+
+        alertDialog2 = alertBuilder.create();
+        alertDialog2.show();
+    }
 
     private String readFileFromAssets(String filename) {
         StringBuilder fileContent = new StringBuilder();

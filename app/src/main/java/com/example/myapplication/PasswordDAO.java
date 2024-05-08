@@ -131,6 +131,66 @@ public class PasswordDAO {
         cursor.close();
         return retCount;
     }
+    /**
+     * 函数功能：模糊搜索——可根据输入的词条，只要"title"、"password"、"username"或"note"中的任意一个字段包含searchStr，就都可以搜索的到
+     * */
+    @SuppressLint("Range")
+    public int queryBlurrySort(String searchStr,int model){
+        String PwdSearchStr = "";
+        int retCount=0;
+        try{
+            // 解密
+            PwdSearchStr = AESUtil.encrypt(searchStr, AESUtil.padKey(AESUtil.AESKey));
+        }catch (Exception e){
+            PwdSearchStr = searchStr;
+        }
+        sql_dataList = new ArrayList<>();
+        String current_sql_sel = "SELECT * FROM passwords where (title like '%"+searchStr+"%') " +
+                "OR (password like '%"+PwdSearchStr+"%') " +
+                "OR (password like '%"+searchStr+"%') " +   //兼容老版本未加密 密码查询
+                "OR (username like '%"+searchStr+"%') "+
+                "OR (note like '%"+searchStr+"%')";
+        if(model == 0){
+            ;
+        } else if (model ==1) {
+            current_sql_sel +="ORDER BY date DESC";
+        } else if (model == 2) {
+            current_sql_sel +="ORDER BY date ASC";
+        }
+        Log.d("current_sql_sel",model+"\t"+current_sql_sel);
+        Cursor cursor = db.rawQuery(current_sql_sel,null);
+        retCount = cursor.getCount();
+        if(cursor!=null){
+            if(!cursor.moveToLast()){
+                Log.d("myquery","空的");
+                return 0;
+            }
+            {
+                mainTitle = cursor.getString(cursor.getColumnIndex("title"));
+                mainUser = cursor.getString(cursor.getColumnIndex("username"));
+                mainPwd = "********";
+                mainNote = cursor.getString(cursor.getColumnIndex("note"));
+                mainDate = cursor.getString(cursor.getColumnIndex("date"));
+                //准备数据
+                Log.d("myquery", "id:"+String.valueOf(mainId));
+                sql_dataList.add(new AppInfo(mainTitle,mainUser,mainPwd,mainNote,mainDate));
+            }
+            while (cursor.moveToPrevious())
+            {
+                mainId = cursor.getInt(0); // 直接通过索引获取字段值
+                mainTitle = cursor.getString(cursor.getColumnIndex("title"));
+                mainUser = cursor.getString(cursor.getColumnIndex("username"));
+                mainPwd = "********";
+                mainNote = cursor.getString(cursor.getColumnIndex("note"));
+                mainDate = cursor.getString(cursor.getColumnIndex("date"));
+                //准备数据
+                sql_dataList.add(new AppInfo(mainTitle,mainUser,mainPwd,mainNote,mainDate));
+                Log.d("myquery", "id:"+String.valueOf(mainId));
+            }
+        }
+        cursor.close();
+        return retCount;
+    }
     //普通单条目密码查询--无加密
     @SuppressLint("Range")
     public String querySinglePwd_catItem(String title){
